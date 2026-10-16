@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Affine Cipher Playground</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="split-layout">
+      <section class="info-panel">
+        <h1>Affine Cipher Playground</h1>
+        <p>
+          Try changing <strong>a</strong> and <strong>b</strong>, then type a message to
+          see how modular arithmetic transforms it.
+        </p>
+        <p class="tip">
+          Friendly tip: choose an <strong>a</strong> value that is coprime with 26 (like
+          1, 3, 5, 7, 9...) so decoding works.
+        </p>
+      </section>
+
+      <section class="workspace-panel">
+        <div class="controls">
+          <label for="a-value">a</label>
+          <input id="a-value" type="number" value="3" />
+          <label for="b-value">b</label>
+          <input id="b-value" type="number" value="16" />
+          <p id="formula">y = (3x + 16) mod 26</p>
+        </div>
+
+        <div class="cipher-rows">
+          <article class="cipher-box">
+            <h2>Plaintext → Ciphertext</h2>
+            <label for="plain-input">Plaintext</label>
+            <input id="plain-input" type="text" placeholder="Type plaintext..." />
+            <label for="cipher-output">Ciphertext</label>
+            <output id="cipher-output" aria-live="polite"></output>
+          </article>
+
+          <article class="cipher-box">
+            <h2>Ciphertext → Plaintext</h2>
+            <label for="cipher-input">Ciphertext</label>
+            <input id="cipher-input" type="text" placeholder="Type ciphertext..." />
+            <label for="plain-output">Plaintext</label>
+            <output id="plain-output" aria-live="polite"></output>
+          </article>
+        </div>
+
+        <article class="code-panel">
+          <h2>JavaScript Logic</h2>
+          <pre><code id="code-snippet"></code></pre>
+        </article>
+
+        <p id="status-message" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
