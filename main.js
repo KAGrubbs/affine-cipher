@@ -11,7 +11,7 @@ const statusMessage = document.getElementById("status-message");
 const codeSnippet = document.getElementById("code-snippet");
 
 function mod1to26(value) {
-  return (((value - 1) % 26) + 26) % 26 + 1;
+  return ((((value - 1) % 26) + 26) % 26) + 1;
 }
 
 function gcd(a, b) {
@@ -62,14 +62,19 @@ function decode(ciphertext, a, b) {
 }
 
 function renderCodeSnippet() {
-  codeSnippet.textContent = `// A=1, B=2, ..., Z=26
-function encodeLetter(x, a, b) {
-  return (((a * x + b - 1) % 26 + 26) % 26) + 1;
-}
+  codeSnippet.textContent = `
+  let a = ${aInput.value || "a"};
+  let b = ${bInput.value || "b"};
+  let aInverse = ${modularInverse(Number.parseInt(aInput.value, 10), 26) || "aInverse"};
 
-function decodeLetter(y, a, b, aInverse) {
-  return (((aInverse * (y - b) - 1) % 26 + 26) % 26) + 1;
-}`;
+  // A=1, B=2, ..., Z=26
+  function encodeLetter(x) {
+    return (((a * x + b - 1) % 26 + 26) % 26) + 1;
+  }
+
+  function decodeLetter(y) {
+    return (((aInverse * (y - b) - 1) % 26 + 26) % 26) + 1;
+  }`;
 }
 
 function update() {
@@ -96,6 +101,8 @@ function update() {
   statusMessage.textContent = "";
   cipherOutput.textContent = encode(plainInput.value, a, b);
   plainOutput.textContent = decode(cipherInput.value, a, b) || "";
+  
+  renderCodeSnippet(); // Update code snippet with new values
 }
 
 renderCodeSnippet();
