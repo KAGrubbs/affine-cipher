@@ -28,6 +28,7 @@ body {
 .info-panel,
 .workspace-panel {
   padding: 2rem;
+  padding-bottom: 0;
 }
 
 .info-panel {
